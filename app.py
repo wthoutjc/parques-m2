@@ -18,4 +18,5 @@ class App():
 
         self.view.render_start()
         
+        
 app = App()
