@@ -152,71 +152,72 @@ class Tablero():
             self.froja4 = self.canvas.create_image((670, 750), image=self.img_froja)
 
     def update_tablero(self, jugador, c_logica):
-        dicc_positions = { #Coordenada logica - Coordenada visual
-            (7,0):(300,0),
+        print('Tablero.py: Pos recibida:' + str(c_logica))
+        dicc_positions = { #Coordenada logica (y,x) - Coordenada visual (x,y)
+            (7,0):(300,0),#(x,y) #Bien ubicado
             (7,1):(300,20),
-            (7,2):(300,150), # Bien ubicado
-            (7,3):(300,80), # Bien ubicado
-            (7,4):(300,120),
-            (7,5):(300,140), # Bien ubicado
-            (7,6):(270,190),
-            (7,7):(270,240),#1 Coordenadas especiales: aca se hacen dos movimientos
-            (6,7):(240,270),
+            (7,2):(300,70), # #Bien ubicado
+            (7,3):(300,100), # 
+            (7,4):(300,120), #Bien ubicado
+            (7,5):(300,170), # 
+            (7,6):(270,190), #Bien ubicado
+            (7,7):(270,240),#1 Coordenadas especiales: aca se hacen dos movimientos Bien ubicado
+            (6,7):(220,270), #Bien ubicado
             (5,7):(180,270),
-            (4,7):(150,270),
-            (3,7):(120,270),
-            (2,7):(80,270),
-            (1,7):(50,270),
-            (0,7):(15,360),#2
-            (0,8):(15,400),
-            (0,9):(15,480),#3
+            (4,7):(150,270), # Bien ubicado
+            (3,7):(110,270),
+            (2,7):(80,270), # Bien ubicado
+            (1,7):(50,270), #
+            (0,7):(15,310),#2 #Bien ubicado
+            (0,8):(15,400), 
+            (0,9):(15,480),#3 #Bien ubicado
             (1,9):(50,480),
-            (2,9):(100,480),
-            (4,9):(200,480),
-            (3,9):(150,480), #Bien ubicado
-            (5,9):(250,480),
-            (6,9):(510,580), #Bien ubicado
-            (7,9):(250,520),#4 Coordenadas especiales: aca se hacen dos movimientos
-            (7,10):(280,560),
+            (2,9):(85,480), #Bien ubicado
+            (4,9):(150,480), # #Bien ubicado
+            (3,9):(120,480), # #Bien ubicado
+            (5,9):(180,480),
+            (6,9):(220,480), # Bien ubicado
+            (7,9):(270,525),#4 Coordenadas especiales: aca se hacen dos movimientos 
+            (7,10):(290,570), # Bien ubicado
             (7,11):(300,600),
-            (7,12):(300,640),
-            (7,13):(300,670),
-            (7,14):(300,700),
-            (7,15):(300,740),
-            (7,16):(300,760),#5
-            (8,16):(500,710), 
-            (9,16):(500,760),#6
-            (9,15):(500,520),
-            (9,14):(500,520),
+            (7,12):(300,640), # Bien ubicado
+            (7,13):(300,670), #Bien ubicado
+            (7,14):(300,700), #Bien ubicado
+            (7,15):(300,735), #Bien ubicado
+            (7,16):(300,760),#5 #Bien ubicado
+            (8,16):(380,770), 
+            (9,16):(500,760),#6 Bien ubicado
+            (9,15):(500,730),
+            (9,14):(500,700), #Bien ubicado
             (9,13):(500,660),
-            (9,12):(410,610), #
-            (9,11):(500,600), #Bien ubicado
-            (9,10):(500,490),
-            (9,9):(500,480),#7 Coordenadas especiales: aca se hacen dos movimientos
-            (10,9):(570,480),
+            (9,12):(500,630), # Bien ubicado
+            (9,11):(500,600), #
+            (9,10):(500,570), #Bien ubicado
+            (9,9):(550,550),#7 Coordenadas especiales: aca se hacen dos movimientos 
+            (10,9):(580,480), #Bien ubicado
             (11,9):(620,480),
-            (12,9):(710,480),
+            (12,9):(650,480), #Bien ubicado
             (13,9):(690,480),
-            (14,9):(700,480),
-            (15,9):(740,480),   
-            (16,9):(770,480),#8
-            (16,8):(770,430),
-            (16,7):(770,300),#9
-            (15,7):(740,300),
-            (14,7):(700,300), #Bien ubicado
-            (13,7):(660,300),
-            (12,7):(620,300),
-            (11,7):(580,300), #Bien ubicado
-            (10,7):(570,280),
-            (9,7):(500,250),#10 Coordenadas especiales: aca se hacen dos movimientos
-            (9,6):(500,190),
-            (9,5):(500,160),
-            (9,4):(500,130),
-            (9,3):(500,100),
-            (9,2):(500,70),
-            (9,1):(500,40),
-            (9,0):(500,10),#11
-            (8,0):(400,0), 
+            (14,9):(715,480), #Bien ubicado
+            (15,9):(750,480),  #Bien ubicado
+            (16,9):(780,480),#8 #Bien ubicado
+            (16,8):(780,360),
+            (16,7):(780,300),#9 #Bien ubicado
+            (15,7):(740,300), #
+            (14,7):(715,300), ##Bien ubicado
+            (13,7):(690,300),
+            (12,7):(655,300),#Bien ubicado
+            (11,7):(580,300), #
+            (10,7):(580,280), #Bien ubicado
+            (9,7):(540,240),#10 Coordenadas especiales: aca se hacen dos movimientos 
+            (9,6):(500,190), #Bien ubicado
+            (9,5):(500,160),#Bien ubicado
+            (9,4):(500,130),#Bien ubicado
+            (9,3):(500,100), #Bien ubicado
+            (9,2):(500,65),#Bien ubicado
+            (9,1):(500,40), #Bien ubicado
+            (9,0):(500,10),#11 #Bien ubicado
+            (8,0):(400,0),  #Bien ubicado
         }   
         if jugador[0][3] == "0001":
             self.delete_canvas([self.fazul1,self.fazul2,self.fazul3,self.fazul4])

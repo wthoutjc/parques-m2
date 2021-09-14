@@ -1,6 +1,6 @@
 from Model.usuarios import Usuarios
 from Model.normas import Normas
-
+from Model.score import Score
 
 class Model():
     def __init__(self):
@@ -11,6 +11,7 @@ class Model():
         self.controller = None
         self.usuarios = Usuarios()
         self.normas = Normas()
+        self.score = Score()
         self.jugador = None
 
     def set_controller(self, controller):
@@ -51,14 +52,14 @@ class Model():
             self.controller.error('Datos no válidos')
             return False
     
-    def es_par(self, jugador):
+    def es_par(self, jugador, tablero):
         '''
         El modelo espera de su componente NORMAS
         una respuesta booleana del proceso de sacar_carcel
         Args:
             jugador: array
         '''
-        data = self.normas.sacar_carcel(jugador)
+        data = self.normas.sacar_carcel(jugador, tablero)
         if data[0]:
             self.usuarios.uptdate_info_player(jugador[0], False, 4)
             #self.usuarios.increment_movimientos(jugador)
@@ -73,3 +74,6 @@ class Model():
     def meter_carcel(self, jugador):
         print('Model, meter_carcel: jugador: ' + str(jugador))
         self.usuarios.uptdate_info_player(jugador,True,4)
+    
+    def incrementar_score(self, score):
+        self.score.set_score(score)

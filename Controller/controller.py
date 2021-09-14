@@ -74,7 +74,7 @@ class Controller():
         self.view.set_jugador(self.jugador)
         self.model.set_jugador(self.jugador)
         if self.jugador[0][4] == True:
-            if self.model.es_par(self.jugador):
+            if self.model.es_par(self.jugador, self.tablero.get_tablero()):
                 self.view.sacar_carcel(self.jugador)
                 self.tablero.sacar_carcel(self.jugador)
         else:
@@ -118,3 +118,6 @@ class Controller():
 
     def get_value_tablero(self, x, y):
         return self.tablero.get_tablero_value(x,y)
+
+    def get_valor_original(self, y, x):
+        return self.tablero.consultar_posiciones(y,x)

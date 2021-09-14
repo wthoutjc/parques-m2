@@ -17,6 +17,5 @@ class App():
         self.controller.set_view(self.view)
 
         self.view.render_start()
-        
-        
+          
 app = App()
