@@ -38,10 +38,10 @@ class Tablero():
         self.label_dados = Label(self.window, text=self.string_dados.get(),font=("Monserrat", 16))
         self.label_dados.place(x=10,y=850)
 
-        self.string_dados = StringVar()
-        self.string_dados.set("Dados: " + str(self.controller.get_dados_int()))
-        self.label_dados = Label(self.window, text=self.string_dados.get(),font=("Monserrat", 16))
-        self.label_dados.place(x=10,y=850)
+        self.string_score = StringVar()
+        self.string_score.set("Score: " + str(self.controller.get_score()))
+        self.label_score = Label(self.window, text=self.string_score.get(),font=("Monserrat", 16))
+        self.label_score.place(x=160,y=850)
 
         self.img_fazul = Image.open("View/images/jugadores/azul.png").resize((30,50), Image.ANTIALIAS)
         self.img_fazul = ImageTk.PhotoImage(self.img_fazul)
@@ -93,6 +93,8 @@ class Tablero():
         self.label_turno.configure(text=self.string_turno.get())
         self.string_dados.set("Dados: " + str(self.controller.get_dados_int()))
         self.label_dados.configure(text=self.string_dados.get())
+        self.string_score.set("Score: " + str(self.controller.get_score()))
+        self.label_score.configure(text=self.string_score.get())
 
     def sacar_carcel(self, jugador):
         '''
@@ -153,8 +155,9 @@ class Tablero():
 
     def update_tablero(self, jugador, c_logica):
         print('Tablero.py: Pos recibida:' + str(c_logica))
-        dicc_positions = { #Coordenada logica (y,x) - Coordenada visual (x,y)
-            (7,0):(300,0),#(x,y) #Bien ubicado
+        dicc_positions = { #Coordenada logica (x,y) - Coordenada visual (x,y)
+            #RUTAS DE RECORRIDO GENERAL:
+            (7,0):(300,0),#(x,y),(x,y) #Bien ubicado
             (7,1):(300,20),
             (7,2):(300,70), # #Bien ubicado
             (7,3):(300,100), # 
@@ -218,6 +221,44 @@ class Tablero():
             (9,1):(500,40), #Bien ubicado
             (9,0):(500,10),#11 #Bien ubicado
             (8,0):(400,0),  #Bien ubicado
+
+            #RUTAS DE RECORRIDO HACIA INCREMENTO DE SCORE:
+            #Jugador 1
+            (8,1):(400,40),
+            (8,2):(400,65),
+            (8,3):(400,100),
+            (8,4):(400,120),
+            (8,5):(400,160),
+            (8,6):(400,190),
+            (8,7):(400,240),
+            #Jugador 2
+            (1,8):(50,400),
+            (2,8):(90,400),
+            (3,8):(130,400),
+            (4,8):(150,400),
+            (5,8):(180,400),
+            (6,8):(220,400),
+            (7,8):(280,400),
+            #Jugador 3 
+            (15,8):(750,360),
+            (14,8):(715,360),
+            (13,8):(690,360),
+            (12,8):(650,360),
+            (11,8):(620,360),
+            (10,8):(580,360),
+            (9,8):(550,360),
+            #Jugador 4
+            (8,15):(400,735),
+            (8,14):(400,700),
+            (8,13):(400,670),
+            (8,12):(400,640),
+            (8,11):(400,600),
+            (8,10):(400,570),
+            (8,9):(400,525),
+
+            #COORDENADA GANADORA
+            (8,8):(400,400)
+
         }   
         if jugador[0][3] == "0001":
             self.delete_canvas([self.fazul1,self.fazul2,self.fazul3,self.fazul4])

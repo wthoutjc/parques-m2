@@ -6,10 +6,10 @@ class Usuarios():
         '''
         Estructura del manejo de la información de los usuarios
         '''
-        self.jugador1 = [None,False,0,'0001',True] #Nombre, turno e ID, score, jugadores en la carcel
-        self.jugador2 = [None,False,0,'0002',True]
-        self.jugador3 = [None,False,0,'0003',True]
-        self.jugador4 = [None,False,0,'0004',True]
+        self.jugador1 = [None,False,0,'0001',True, False] #Nombre, turno e ID, score, jugadores en la carcel, completo una vuelta
+        self.jugador2 = [None,False,0,'0002',True, False]
+        self.jugador3 = [None,False,0,'0003',True, False]
+        self.jugador4 = [None,False,0,'0004',True, False]
 
         self.score = None
 
@@ -58,3 +58,13 @@ class Usuarios():
         Devuelve el dicc con la info de los jugadores
         '''
         return self.players
+
+    def get_info_player(self, jugador, position):
+        if jugador[0][3] == '0001':
+            return self.jugador1[position]
+        if jugador[0][3] == '0002':
+            return self.jugador2[position]
+        if jugador[0][3] == '0003':
+            return self.jugador3[position]
+        if jugador[0][3] == '0004':
+            return self.jugador4[position]

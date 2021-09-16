@@ -17,7 +17,7 @@ class Normas():
         self.controller = controller
 
     def register_rule(self, data):
-        '''
+        '''[0]
         Clase que incluira las normas del parques
         Args:
             data: dicc
@@ -67,8 +67,24 @@ class Normas():
         y, x = positions
 
         # Comprobamos si ya da una vuelta PARTE 1
-        self.dio_vuelta = False
-
+        
+        self.dio_vuelta_j1 = False
+        self.dio_vuelta_j2 = False
+        self.dio_vuelta_j3 = False
+        self.dio_vuelta_j4 = False
+        if jugador[0][3] == "0001":
+            if x == 8 and y >= 0 and y < 8:
+                self.dio_vuelta_j1 = True
+        if jugador[0][3] == "0002":
+            if y == 8 and x >= 0 and x < 8: 
+                self.dio_vuelta_j2 = True
+        if jugador[0][3] == "0003":
+            if y == 8 and x <= 16 and x > 8:
+                self.dio_vuelta_j3 = True
+        if jugador[0][3] == "0004":
+            if x == 8 and y <= 16 and y > 8:
+                self.dio_vuelta_j4 = True
+        
         self.moves = 0
         self.moves_aux = 0
         self.moves_per_if = 0
@@ -143,6 +159,15 @@ class Normas():
                             self.moves += 1
                             self.moves_per_if += 1
                             print('Pos en while'+ str([y,x]))
+                    if x == 8:
+                        if self.moves_per_if == 0:
+                            print(' x > 9 and x <= 16 ')
+                            data = self.controller.get_value_tablero(y+1,x)
+                            print('Data: ' + str(data))
+                            y += 1
+                            self.moves += 1
+                            self.moves_per_if += 1
+                            print('Pos en while'+ str([y,x]))
                 if y == 16:
                     print(' y == 16 ')
                     if x >= 7 and x < 9:
@@ -155,8 +180,9 @@ class Normas():
                             self.moves_per_if += 1
                             print('Pos en while'+ str([y,x]))
                             if x == 8:
-                                if jugador[3] == '004':
-                                    self.dio_vuelta = True
+                                if jugador[0][3] == '0004':
+                                    print(' Jugador 4 completa vuelta ')
+                                    self.dio_vuelta_j4 = True
                     if x == 9:
                         if self.moves_per_if == 0:
                             print(' x == 9 ')
@@ -225,7 +251,17 @@ class Normas():
                             self.moves += 1
                             self.moves_per_if += 1
                             print('Pos en while'+ str([y,x]))
+                    if x == 8:
+                        if self.moves_per_if == 0:
+                            print(' x == 0 ')
+                            data = self.controller.get_value_tablero(y-1,x)
+                            print('Data: ' + str(data))
+                            y -= 1
+                            self.moves += 1
+                            self.moves_per_if += 1
+                            print('Pos en while'+ str([y,x]))
                 if y == 8:
+                    print([y,x])
                     print(' y == 8 ')
                     if x == 0:
                         if self.moves_per_if == 0:
@@ -236,8 +272,9 @@ class Normas():
                             self.moves += 1
                             self.moves_per_if += 1
                             print('Pos en while'+ str([y,x]))
-                            if jugador[3] == '002':
-                                self.dio_vuelta = True
+                            if jugador[0][3] == '0002':
+                                print(' Jugador 2 completa vuelta ')
+                                self.dio_vuelta_j2 = True
                     if x == 16:
                         if self.moves_per_if == 0:
                             print(' x == 0 ')
@@ -247,8 +284,64 @@ class Normas():
                             self.moves += 1
                             self.moves_per_if += 1
                             print('Pos en while'+ str([y,x]))
-                            if jugador[3] == '003':
-                                self.dio_vuelta = True
+                            if jugador[0][3] == '0003':
+                                print(' Jugador 3 completa vuelta ')
+                                self.dio_vuelta_j3 = True
+                    if x > 0 and x < 8:
+                        if self.moves_per_if == 0:
+                            print(' x > 0 and x < 8 ')
+                            data = self.controller.get_value_tablero(y,x+1)
+                            print('Data: ' + str(data))
+                            x += 1
+                            self.moves += 1
+                            self.moves_per_if += 1
+                            print('Pos en while'+ str([y,x]))
+                    if x > 8 and x < 16:
+                        if self.moves_per_if == 0:
+                            print(' x > 0 and x < 8 ')
+                            data = self.controller.get_value_tablero(y,x-1)
+                            print('Data: ' + str(data))
+                            x -= 1
+                            self.moves += 1
+                            self.moves_per_if += 1
+                            print('Pos en while'+ str([y,x]))
+                    if x == 8:
+                        if jugador[0][3] == '0001':
+                            if self.moves_per_if == 0:
+                                print(' x == 8 ')
+                                data = self.controller.get_value_tablero(y+1,x)
+                                print('Data: ' + str(data))
+                                y += 1
+                                self.moves += 1
+                                self.moves_per_if += 1
+                                print('Pos en while'+ str([y,x]))
+                        if jugador[0][3] == '0002':
+                            if self.moves_per_if == 0:
+                                print(' x == 8 ')
+                                data = self.controller.get_value_tablero(y,x+1)
+                                print('Data: ' + str(data))
+                                x += 1
+                                self.moves += 1
+                                self.moves_per_if += 1
+                                print('Pos en while'+ str([y,x]))
+                        if jugador[0][3] == '0003':
+                            if self.moves_per_if == 0:
+                                print(' x == 8 ')
+                                data = self.controller.get_value_tablero(y,x-1)
+                                print('Data: ' + str(data))
+                                x -= 1
+                                self.moves += 1
+                                self.moves_per_if += 1
+                                print('Pos en while'+ str([y,x]))
+                        if jugador[0][3] == '0004':
+                            if self.moves_per_if == 0:
+                                print(' x == 8 ')
+                                data = self.controller.get_value_tablero(y-1,x)
+                                print('Data: ' + str(data))
+                                y -= 1
+                                self.moves += 1
+                                self.moves_per_if += 1
+                                print('Pos en while'+ str([y,x]))
                 if y > 9 and y < 16:
                     print(' y > 9 and y < 16 ')
                     if x == 7:
@@ -263,6 +356,15 @@ class Normas():
                     if x == 9:
                         if self.moves_per_if == 0:
                             print(' x == 7 ')
+                            data = self.controller.get_value_tablero(y-1,x)
+                            print('Data: ' + str(data))
+                            y -= 1
+                            self.moves += 1
+                            self.moves_per_if += 1
+                            print('Pos en while'+ str([y,x]))
+                    if x == 8:
+                        if self.moves_per_if == 0:
+                            print(' x == 8 ')
                             data = self.controller.get_value_tablero(y-1,x)
                             print('Data: ' + str(data))
                             y -= 1
@@ -289,6 +391,15 @@ class Normas():
                             self.moves += 1
                             self.moves_per_if += 1
                             print('Pos en while'+ str([y,x]))
+                    if x == 8:
+                        if self.moves_per_if == 0:
+                            print(' x == 8 ')
+                            data = self.controller.get_value_tablero(y+1, x)
+                            print('Data: ' + str(data))
+                            y += 1
+                            self.moves += 1
+                            self.moves_per_if += 1
+                            print('Pos en while'+ str([y,x]))
                 if y == 0:
                     print(' y == 0 ')
                     if x <= 9 and x > 7:
@@ -300,8 +411,9 @@ class Normas():
                             self.moves += 1
                             self.moves_per_if += 1
                             if x == 8:
-                                if jugador[3] == '001':
-                                    self.dio_vuelta = True
+                                if jugador[0][3] == '0001':
+                                    print(' Jugador 1 completa vuelta ')
+                                    self.dio_vuelta_j1 = True
                         print('Pos en while'+ str([y,x]))
                     if x == 7:
                         if self.moves_per_if == 0:
@@ -367,31 +479,38 @@ class Normas():
             if self.moves_aux == (9,9,True):
                 y = 9
                 x = 9
-            print('Pos despues:' + str([y, x]))
+            print('Pos despues PARTE1:' + str([y, x]))
 
             # Comprobamos si ya da una vuelta PARTE 2
             # Si llega la coordenada (8,8) incrementa el score en 1 y pone otros jugadores en la carcel
             # Dependiendo de cada jugador rebotar el limite, ej: si el jugador 4 tira dados y sobre pasa (8,8) restar ese excedente y bajarlo a la posicion de la linea ganadora
-            if jugador[3] == "0001" and self.dio_vuelta:
-                self.pos_j1 = (8, 0)
-                self.excedente = abs(self.pos_j1[0] - y) + abs(self.pos_j1[1] - x)
-                x = 8
-                y = self.excedente #FALTA REBOTAR EL LIMITE
-            if jugador[3] == "0002" and self.dio_vuelta:
-                self.pos_j4 = (16, 8)
-                self.excedente = abs(self.pos_j4[0] - y) + abs(self.pos_j4[1] - x)
-                y = 8
-                x = self.excedente #FALTA REBOTAR EL LIMITE
-            if jugador[3] == "0003" and self.dio_vuelta:
-                self.pos_j4 = (16, 8)
-                self.excedente = abs(self.pos_j4[0] - y) + abs(self.pos_j4[1] - x)
-                x = 16
-                y = self.excedente #FALTA REBOTAR EL LIMITE
-            if jugador[3] == "0004" and self.dio_vuelta:
-                self.pos_j4 = (16, 8)
-                self.excedente = abs(self.pos_j4[0] - y) + abs(self.pos_j4[1] - x)
-                y = 8
-                x = self.excedente #FALTA REBOTAR EL LIMITE
+            if jugador[0][3] == "0001":
+                print('Jugador 1' + str(self.dio_vuelta_j1))
+            if jugador[0][3] == "0002":
+                print('Jugador 2' + str(self.dio_vuelta_j2))
+            if jugador[0][3] == "0003":
+                print('Jugador 3' + str(self.dio_vuelta_j3))
+            if jugador[0][3] == "0004":
+                print('Jugador 4' + str(self.dio_vuelta_j4))
+
+            if jugador[0][3] == "0001" and self.dio_vuelta_j1 == True:
+                if y > 8:
+                    x = 8
+                    y = 8
+            if jugador[0][3] == "0002" and self.dio_vuelta_j2 == True:
+                if x > 8:
+                    x = 8
+                    y = 8
+            if jugador[0][3] == "0003" and self.dio_vuelta_j3 == True:
+                if x < 8:
+                    x = 8
+                    y = 8
+            if jugador[0][3] == "0004" and self.dio_vuelta_j4 == True:
+                if y < 8:
+                    x = 8
+                    y = 8
+            
+            print('Pos despues PARTE2:' + str([y, x]))
             # Conseguir el valor original de la matriz estado 0:
             self.valor_original = self.controller.get_valor_original(self.pos_inicial[0], self.pos_inicial[1])
 
@@ -403,11 +522,16 @@ class Normas():
             if type(data) == list:
                 self.controller.meter_carcel(data)
 
-            # Setea el jugador en la nueva posicion calculada
-            self.controller.set_value_tablero(y,x, jugador[0])
+            # Si coordenadas 8,8 aumenta el score y a la carcel
+            if x == 8 and y == 8:
+                self.controller.meter_carcel(jugador[0])
+                self.controller.aumentar_score(jugador)
+            else:
+                # Setea el jugador en la nueva posicion calculada
+                self.controller.set_value_tablero(y,x, jugador[0])
 
-            # Actualiza las coordenadas visuales
-            self.controller.update_visual_coords(jugador, (x,y))
+                # Actualiza las coordenadas visuales
+                self.controller.update_visual_coords(jugador, (x,y))
 
-            # Actualiza las coordendas logicas
-            self.controller.set_coords_player(jugador, y, x)
+                # Actualiza las coordendas logicas
+                self.controller.set_coords_player(jugador, y, x)

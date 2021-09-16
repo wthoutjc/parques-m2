@@ -65,6 +65,9 @@ class Model():
             #self.usuarios.increment_movimientos(jugador)
             return data[0]
 
+    def get_score(self):
+        return self.score.get_score(self.jugador)
+
     def acept_new_movement(self, jugador, tablero, positions):
         self.normas.analyze_context(jugador, tablero, positions)
     
@@ -75,5 +78,11 @@ class Model():
         print('Model, meter_carcel: jugador: ' + str(jugador))
         self.usuarios.uptdate_info_player(jugador,True,4)
     
-    def incrementar_score(self, score):
-        self.score.set_score(score)
+    def aumentar_score(self, jugador):
+        self.score.aumentar_score(jugador)
+
+    def update_info_player(self, jugador, value, position):
+        self.usuarios.uptdate_info_player(jugador, value, position)
+
+    def get_info_player(self, jugador, position):
+        return self.usuarios.get_info_player(jugador, position)

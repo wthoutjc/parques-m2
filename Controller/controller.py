@@ -107,6 +107,12 @@ class Controller():
         '''
         return reduce(lambda x, y: x+y, self.model.get_jugador()[1])
 
+    def get_score(self):
+        '''
+        Devuelve el score
+        '''
+        return self.model.get_score()
+
     def update_visual_coords(self, jugador, coords):
         self.view.update_tablero(jugador, coords)
 
@@ -121,3 +127,6 @@ class Controller():
 
     def get_valor_original(self, y, x):
         return self.tablero.consultar_posiciones(y,x)
+    
+    def aumentar_score(self, jugador):
+        self.model.aumentar_score(jugador)
