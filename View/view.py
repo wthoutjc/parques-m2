@@ -1,5 +1,6 @@
 from tkinter import *
-from tkinter import Canvas, messagebox
+from tkinter import Frame, Canvas
+from PIL import Image, ImageTk
 
 #Controlador
 from Controller.controller import Controller
@@ -23,13 +24,34 @@ class View():
         self.window.title(title)
         self.window.resizable(0,0)
 
-        self.labelTitle0 = Label(self.window, text="Parqués - UDFJC",font=("Helvetica", 10)).grid(row=0,column=0,columnspan = 4,pady=2,padx=2)
-        self.labelTitle1 = Label(self.window, text="Por: ",font=("Helvetica", 9)).grid(row=1,column=0,columnspan = 4,pady=2,padx=2)
-        #self.name0 = Label(self.window, text="Juan Camilo Ramírez Rátiva - 20181020089",font=("Helvetica", 8)).grid(row=2,column=0,columnspan = 4,pady=2,padx=2)
-        #self.name0 = Label(self.window, text="Juan Camilo Ramírez Rátiva - 20181020089",font=("Helvetica", 8)).grid(row=2,column=0,columnspan = 4,pady=2,padx=2)
-        #self.name0 = Label(self.window, text="Juan Camilo Ramírez Rátiva - 20181020089",font=("Helvetica", 8)).grid(row=2,column=0,columnspan = 4,pady=2,padx=2)
+        self.frame = Frame(self.window)
+        self.frame.pack()
 
-        self.start = Button(self.window, text = "Start", width = 8, height = 2, command = lambda: self.render_component('register', self.window)).grid(row = 5, column = 0, padx = 2, pady = 2)
+        self.canvas = Canvas(self.frame, bg="black", width=520, height=700)
+        self.canvas.pack()
+
+        self.background = Image.open("View/images/background_start.jpg")
+        self.background.thumbnail((1200,800)) # Redimension (Alto, Ancho)
+        self.background = ImageTk.PhotoImage(self.background)
+        self.canvas.create_image((260,300), image=self.background)
+
+        self.labelTitle0 = Label(self.window, text="Parqués - UDFJC",font=("Helvetica", 10))
+        self.labelTitle0.place(x=220, y=50)
+
+        self.labelTitle1 = Label(self.window, text="Por: ",font=("Helvetica", 9))
+        self.labelTitle1.place(x=150, y=200)
+
+        self.name0 = Label(self.window, text="Santiago Helainer Galindo Marín - 20172020047",font=("Helvetica", 8))
+        self.name0.place(x=150, y=250)
+
+        self.name1 = Label(self.window, text="Andrés Camilo Jiménez Mantilla - 20181020133",font=("Helvetica", 8))
+        self.name1.place(x=150, y=350)
+
+        self.name2 = Label(self.window, text="Juan Camilo Ramírez Rátiva - 20181020089",font=("Helvetica", 8))
+        self.name2.place(x=150, y=450)
+
+        self.start = Button(self.window, text = "Start", width = 8, height = 2, command = lambda: self.render_component('register', self.window))
+        self.start.place(x=220, y=650)
 
     def set_window(self, window):
         '''

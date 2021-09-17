@@ -1,9 +1,5 @@
 from functools import *
 
-#Falta: 
-#       Cuando haga 1 vuelta completa desviar el camino hacia el camino del triunfo
-#       Implementar la clase score
-
 class Normas():
     def __init__(self):
         '''
@@ -494,18 +490,35 @@ class Normas():
                 print('Jugador 4' + str(self.dio_vuelta_j4))
 
             if jugador[0][3] == "0001" and self.dio_vuelta_j1 == True:
+                self.pos_j1 = (0, 8)
+                self.excedente = abs(self.pos_j1[0] - y) + abs(self.pos_j1[1] - x)
+                #print('EXCENDETE: ' + str(self.excedente))
+                x = 8
+                y = self.excedente
                 if y > 8:
                     x = 8
                     y = 8
             if jugador[0][3] == "0002" and self.dio_vuelta_j2 == True:
+                self.pos_j4 = (8, 0)
+                self.excedente = abs(self.pos_j4[0] - y) + abs(self.pos_j4[1] - x)
+                y = 8
+                x = self.excedente
                 if x > 8:
                     x = 8
                     y = 8
             if jugador[0][3] == "0003" and self.dio_vuelta_j3 == True:
+                self.pos_j4 = (8, 16)
+                self.excedente = abs(self.pos_j4[0] - y) + abs(self.pos_j4[1] - x)
+                x = self.excedente
+                y = 8
                 if x < 8:
                     x = 8
                     y = 8
             if jugador[0][3] == "0004" and self.dio_vuelta_j4 == True:
+                self.pos_j4 = (16, 8)
+                self.excedente = abs(self.pos_j4[0] - y) + abs(self.pos_j4[1] - x)
+                x = 8
+                y = self.excedente
                 if y < 8:
                     x = 8
                     y = 8
@@ -520,7 +533,8 @@ class Normas():
             # Comprobamos si el valor par actualizar la matriz contiene otro jugador, en ese caso a la carcel
             data = self.controller.get_value_tablero(y, x)
             if type(data) == list:
-                self.controller.meter_carcel(data)
+                if self.controller.get_valor_original(y, x) != 'S':
+                    self.controller.meter_carcel(data)
 
             # Si coordenadas 8,8 aumenta el score y a la carcel
             if x == 8 and y == 8:
